@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A45225A3F4E5DA641CD19DEF /* Pods_PhidgetsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115F99C8A58381BA481F014B /* Pods_PhidgetsProject.framework */; };
 		E3AA5DEE2188F4AF00913956 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AA5DED2188F4AF00913956 /* AppDelegate.swift */; };
 		E3AA5DF02188F4AF00913956 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AA5DEF2188F4AF00913956 /* ViewController.swift */; };
 		E3AA5DF32188F4AF00913956 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E3AA5DF12188F4AF00913956 /* Main.storyboard */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		115F99C8A58381BA481F014B /* Pods_PhidgetsProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhidgetsProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C8141C2A174AA39145FFBDF /* Pods-PhidgetsProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhidgetsProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhidgetsProject/Pods-PhidgetsProject.release.xcconfig"; sourceTree = "<group>"; };
+		C32A1392AE20245DE1CD0C6E /* Pods-PhidgetsProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhidgetsProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhidgetsProject/Pods-PhidgetsProject.debug.xcconfig"; sourceTree = "<group>"; };
 		E3AA5DEA2188F4AF00913956 /* PhidgetsProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhidgetsProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AA5DED2188F4AF00913956 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3AA5DEF2188F4AF00913956 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A45225A3F4E5DA641CD19DEF /* Pods_PhidgetsProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0305563CA9342290ADC03E51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				115F99C8A58381BA481F014B /* Pods_PhidgetsProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E382362454AB332C36FEF228 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C32A1392AE20245DE1CD0C6E /* Pods-PhidgetsProject.debug.xcconfig */,
+				7C8141C2A174AA39145FFBDF /* Pods-PhidgetsProject.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E3AA5DE12188F4AF00913956 = {
 			isa = PBXGroup;
 			children = (
 				E3AA5DEC2188F4AF00913956 /* PhidgetsProject */,
 				E3AA5DEB2188F4AF00913956 /* Products */,
+				E382362454AB332C36FEF228 /* Pods */,
+				0305563CA9342290ADC03E51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,9 +95,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E3AA5DFC2188F4B000913956 /* Build configuration list for PBXNativeTarget "PhidgetsProject" */;
 			buildPhases = (
+				73BB1D6248D0235B1ADF5672 /* [CP] Check Pods Manifest.lock */,
 				E3AA5DE62188F4AF00913956 /* Sources */,
 				E3AA5DE72188F4AF00913956 /* Frameworks */,
 				E3AA5DE82188F4AF00913956 /* Resources */,
+				D2F6E5CD46E7B4B29E1C8D77 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +155,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		73BB1D6248D0235B1ADF5672 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhidgetsProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2F6E5CD46E7B4B29E1C8D77 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PhidgetsProject/Pods-PhidgetsProject-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Phidget22Swift/Phidget22Swift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Phidget22Swift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhidgetsProject/Pods-PhidgetsProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E3AA5DE62188F4AF00913956 /* Sources */ = {
@@ -280,6 +353,7 @@
 		};
 		E3AA5DFD2188F4B000913956 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C32A1392AE20245DE1CD0C6E /* Pods-PhidgetsProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -297,6 +371,7 @@
 		};
 		E3AA5DFE2188F4B000913956 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C8141C2A174AA39145FFBDF /* Pods-PhidgetsProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
