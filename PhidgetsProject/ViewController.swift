@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     
     let buttonArray = [DigitalInput(), DigitalInput()]
     let ledArray = [DigitalOutput(), DigitalOutput()]
+    var redButtonPressed : Bool = false
+    var greenButtonPressed : Bool = false
     
     
     func attach_handler(sender: Phidget){
@@ -53,10 +55,12 @@ class ViewController: UIViewController {
             if(state == true){
                 print("Button Pressed")
                 try ledArray[0].setState(true)
+
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[0].setState(false)
+                try ledArray[1].setState(false)
+            
             }
         } catch let err as PhidgetError{
             print("Phidget Error " + err.description)
@@ -75,7 +79,7 @@ class ViewController: UIViewController {
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[1].setState(false)
+                try ledArray[0].setState(false)
             }
         } catch let err as PhidgetError{
             print("Phidget Error " + err.description)
@@ -115,6 +119,8 @@ class ViewController: UIViewController {
             
             let _ = buttonArray[0].stateChange.addHandler(state_change_button0)
             let _ = buttonArray[1].stateChange.addHandler(state_change_button1)
+            
+
             
         } catch let err as PhidgetError {
             print("Phidget Error " + err.description)
