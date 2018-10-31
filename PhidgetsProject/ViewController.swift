@@ -48,7 +48,7 @@ class ViewController: UIViewController {
     }
     
     //state change for button 0
-    func state_change(sender:DigitalInput, state:Bool){
+    func state_change_button0(sender:DigitalInput, state:Bool){
         do{
             if(state == true){
                 print("Button Pressed")
@@ -65,7 +65,26 @@ class ViewController: UIViewController {
         }
     }
     
-
+    
+    //state change for button 0
+    func state_change_button1(sender:DigitalInput, state:Bool){
+        do{
+            if(state == true){
+                print("Button Pressed")
+                try ledArray[1].setState(true)
+            }
+            else{
+                print("Button Not Pressed")
+                try ledArray[1].setState(false)
+            }
+        } catch let err as PhidgetError{
+            print("Phidget Error " + err.description)
+        } catch{
+            //catch other errors here
+        }
+    }
+    
+    
     
     
     override func viewDidLoad() {
@@ -81,7 +100,6 @@ class ViewController: UIViewController {
                 try buttonArray[i].setHubPort(i)
                 try buttonArray[i].setIsHubPortDevice(true)
                 let _ = buttonArray[i].attach.addHandler(attach_handler)
-                let _ = buttonArray[i].stateChange.addHandler(state_change)
                 try buttonArray[i].open()
             }
             
@@ -95,6 +113,8 @@ class ViewController: UIViewController {
                 try ledArray[i].open()
             }
             
+            let _ = buttonArray[0].stateChange.addHandler(state_change_button0)
+            let _ = buttonArray[1].stateChange.addHandler(state_change_button1)
             
         } catch let err as PhidgetError {
             print("Phidget Error " + err.description)
