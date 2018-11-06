@@ -23,6 +23,15 @@ class ViewController: UIViewController {
     var redButtonPressed : Bool = false
     var greenButtonPressed : Bool = false
     
+    //variables for mainstoryboard
+    
+    var numberpressedred : Int = 0
+    var numberpressedgreen : Int = 0
+    
+    
+    @IBOutlet weak var pressedredbutton: UILabel!
+    @IBOutlet weak var pressedgreenbutton: UILabel!
+    
     
     func attach_handler(sender: Phidget){
         do{
@@ -55,11 +64,13 @@ class ViewController: UIViewController {
             if(state == true){
                 print("Button Pressed")
                 try ledArray[0].setState(true)
+                numberpressedred = numberpressedred + 1
+                updateUIred()
 
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[1].setState(false)
+                try ledArray[0].setState(false)
             
             }
         } catch let err as PhidgetError{
@@ -70,16 +81,18 @@ class ViewController: UIViewController {
     }
     
     
-    //state change for button 0
+    //state change for button 1
     func state_change_button1(sender:DigitalInput, state:Bool){
         do{
             if(state == true){
                 print("Button Pressed")
                 try ledArray[1].setState(true)
+                numberpressedgreen = numberpressedgreen + 1
+                updateUIgreen()
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[0].setState(false)
+                try ledArray[1].setState(false)
             }
         } catch let err as PhidgetError{
             print("Phidget Error " + err.description)
@@ -88,8 +101,13 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateUIred() {
+        pressedredbutton.text = "Score: \(numberpressedred)"
+    }
     
-    
+    func updateUIgreen() {
+        pressedgreenbutton.text = "Score: \(numberpressedgreen)"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
