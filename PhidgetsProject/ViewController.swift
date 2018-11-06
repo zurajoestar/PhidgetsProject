@@ -29,6 +29,7 @@ class ViewController: UIViewController {
     var numberpressedgreen : Int = 0
     
     
+   
     @IBOutlet weak var pressedredbutton: UILabel!
     @IBOutlet weak var pressedgreenbutton: UILabel!
     
@@ -67,6 +68,7 @@ class ViewController: UIViewController {
                 numberpressedred = numberpressedred + 1
                 updateUIred()
 
+
             }
             else{
                 print("Button Not Pressed")
@@ -102,11 +104,15 @@ class ViewController: UIViewController {
     }
     
     func updateUIred() {
-        pressedredbutton.text = "Score: \(numberpressedred)"
+        DispatchQueue.main.async {
+            self.pressedredbutton.text = "Score: \(self.numberpressedred)"
+        }
     }
-    
+
     func updateUIgreen() {
-        pressedgreenbutton.text = "Score: \(numberpressedgreen)"
+        DispatchQueue.main.async {
+            self.pressedgreenbutton.text = "Score: \(self.numberpressedgreen)"
+        }
     }
     
     override func viewDidLoad() {
