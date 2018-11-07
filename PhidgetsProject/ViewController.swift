@@ -10,18 +10,11 @@ import UIKit
 import Phidget22Swift
 
 class ViewController: UIViewController {
-
-    
-//    let button0 = DigitalInput()
-//    let button1 = DigitalInput()
-//    let led2 = DigitalOutput()
-//    let led3 = DigitalOutput()
-    
     
     let buttonArray = [DigitalInput(), DigitalInput()]
     let ledArray = [DigitalOutput(), DigitalOutput()]
-    var redButtonPressed : Bool = false
-    var greenButtonPressed : Bool = false
+    var isPlayerReady : Bool = true
+
     
     //variables for mainstoryboard
     
@@ -64,7 +57,12 @@ class ViewController: UIViewController {
         do{
             if(state == true){
                 print("Button Pressed")
+            if(isPlayerReady == true) {
+                print("isRedReddy if works")
+                isPlayerReady = false
+                try ledArray[1].setState(false)
                 try ledArray[0].setState(true)
+                    }
                 numberpressedred = numberpressedred + 1
                 updateUIred()
 
@@ -72,7 +70,6 @@ class ViewController: UIViewController {
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[0].setState(false)
             
             }
         } catch let err as PhidgetError{
@@ -88,13 +85,19 @@ class ViewController: UIViewController {
         do{
             if(state == true){
                 print("Button Pressed")
-                try ledArray[1].setState(true)
+                if(isPlayerReady == true) {
+                    print("isReady if works")
+                    isPlayerReady = false
+                    try ledArray[0].setState(false)
+                    try ledArray[1].setState(true)
+                }
+                
                 numberpressedgreen = numberpressedgreen + 1
                 updateUIgreen()
             }
             else{
                 print("Button Not Pressed")
-                try ledArray[1].setState(false)
+                //try ledArray[0].setState(false)
             }
         } catch let err as PhidgetError{
             print("Phidget Error " + err.description)
