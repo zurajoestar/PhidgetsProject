@@ -11,20 +11,25 @@ import Phidget22Swift
 
 class ViewController: UIViewController {
     
-    let buttonArray = [DigitalInput(), DigitalInput()]
-    let ledArray = [DigitalOutput(), DigitalOutput()]
-    var isPlayerReady : Bool = true
+    //variables like in Quizlerr
+    let allQuestions = QuestionBank()
 
     
     //variables for mainstoryboard
+    var redScore : Int = 0
+    var greenScore : Int = 0
     
-    var numberpressedred : Int = 0
-    var numberpressedgreen : Int = 0
+    
+    //things from mainstoryboard
+    @IBOutlet weak var questionScreen: UILabel!
+    @IBOutlet weak var redScoreLabel: UILabel!
+    @IBOutlet weak var greenScoreLabel: UILabel!
     
     
-   
-    @IBOutlet weak var pressedredbutton: UILabel!
-    @IBOutlet weak var pressedgreenbutton: UILabel!
+    //for the phidget
+    let buttonArray = [DigitalInput(), DigitalInput()]
+    let ledArray = [DigitalOutput(), DigitalOutput()]
+    var isPlayerReady : Bool = true
     
     
     func attach_handler(sender: Phidget){
@@ -63,10 +68,8 @@ class ViewController: UIViewController {
                 try ledArray[1].setState(false)
                 try ledArray[0].setState(true)
                     }
-                numberpressedred = numberpressedred + 1
+                redScore = redScore + 1
                 updateUIred()
-
-
             }
             else{
                 print("Button Not Pressed")
@@ -92,12 +95,11 @@ class ViewController: UIViewController {
                     try ledArray[1].setState(true)
                 }
                 
-                numberpressedgreen = numberpressedgreen + 1
+                greenScore = greenScore + 1
                 updateUIgreen()
             }
             else{
                 print("Button Not Pressed")
-                //try ledArray[0].setState(false)
             }
         } catch let err as PhidgetError{
             print("Phidget Error " + err.description)
@@ -108,18 +110,23 @@ class ViewController: UIViewController {
     
     func updateUIred() {
         DispatchQueue.main.async {
-            self.pressedredbutton.text = "Score: \(self.numberpressedred)"
+            self.redScoreLabel.text = "Score: \(self.redScore)"
         }
     }
 
     func updateUIgreen() {
         DispatchQueue.main.async {
-            self.pressedgreenbutton.text = "Score: \(self.numberpressedgreen)"
+            self.greenScoreLabel.text = "Score: \(self.greenScore)"
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let firstQuestion = allQuestions.list[0]
+        questionScreen.text = firstQuestion.questionText
+        
         
         do {
             //enable server
